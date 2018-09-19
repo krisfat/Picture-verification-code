@@ -23,6 +23,7 @@ def download_img():
 		'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15'
 	}
 	url = 'http://www.1kkk.com/image3.ashx'
+	# 取大约500张图片，其实最后终极去重之后只剩下了150张左右
 	for count in range(1, 501):
 		response = requests.get(url, headers=headers)
 		if response.status_code == 200:
@@ -45,7 +46,7 @@ def cut_img():
 
 
 def compare():
-	# 对比图片达到去重的目的
+	# 对比图片达到去重的目的，这里为了写的更为详细，其实写的有点麻烦了可以改良的
 	x = 1
 	while True:
 		y = x +1
@@ -84,7 +85,7 @@ def get_img():
 	browser.get(url)
 	screenshot = browser.get_screenshot_as_png()
 	screenshot = Image.open(BytesIO(screenshot))
-	# crop中的数值收您分辨率的影响，所以请自己获取
+	# crop中的数值收您分辨率的影响，所以请自己获取对应的坐标
 	image1 = screenshot.crop((1402, 660, 1554, 812))
 	image1 = image1.resize((76, 76))
 	image1.save('./kkk/image1.png')
@@ -128,6 +129,7 @@ def img_detail(i, j, angle):
 	# rotate逆时针旋转
 	image1 = image1.rotate(90 * angle)
 	image2 = Image.open('/Users/krisfat/Python学习/5.爬虫/day6/images/image%d.jpg' % j)
+	# 逐个像素点惊醒对比，出现不一样的直接返回
 	for x in range(76):
 		for y in range(76):
 			pixel1 = image1.load()[x, y]
@@ -150,13 +152,19 @@ def rename():
 
 
 def main():
+	# 下载图片运行一次就行
 	# download_img()
+	# 切割图片运行一次就行
 	# cut_img()
+	# 去重也只需要运行一次
 	# compare()
+	# 在登录的时候获取网页上的图片
 	# get_img()
+	# 去重之后使用进行重命名
 	rename()
+	# 得到字典key是第几张对图片，value是对应的旋转次数
 	# result = compare_images()
-	# print(result)
+	# 实现点击旋转
 	# login(result)
 	print('Done !')
 

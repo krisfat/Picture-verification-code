@@ -163,7 +163,7 @@ def main():
 	# 在登录的时候获取网页上的图片
 	# get_img()
 	# 去重之后使用进行重命名
-	rename()
+    # rename()
 	# 得到字典key是第几张对图片，value是对应的旋转次数
 	# result = compare_images()
 	# 实现点击旋转

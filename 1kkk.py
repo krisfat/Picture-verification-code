@@ -136,7 +136,9 @@ def img_detail(i, j, angle):
 			pixel2 = image2.load()[x, y]
 			threshold = 100
 			if not abs(pixel1[0] - pixel2[0]) < threshold and abs(pixel1[1] - pixel2[1]) < threshold and abs(pixel1[2] - pixel2[2]) < threshold:
-				return False
+				bad_counts += 1
+				if bad_counts >= 3:
+					return False
 	return True
 
 
